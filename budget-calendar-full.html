@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Calendar — May 2026 through January 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e; --cream: #faf7f2; --gold: #c9a84c; --gold-light: #f0e2b6;
+    --red: #c0392b; --green: #2d6a4f; --green-light: #d8f3dc;
+    --blue: #1d3557; --blue-light: #e8f1f8; --orange: #e07b39;
+    --orange-light: #fdebd0; --gray: #8a8a8a; --border: #e0d8cc;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); min-height:100vh; padding:24px 16px; }
+  .page { max-width:860px; margin:0 auto; }
+
+  .header { text-align:center; margin-bottom:28px; padding-bottom:20px; border-bottom:2px solid var(--gold); }
+  .header-label { font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .header h1 { font-family:'DM Serif Display',serif; font-size:36px; color:var(--ink); line-height:1; margin-bottom:4px; }
+  .header-sub { font-size:13px; color:var(--gray); font-weight:300; }
+
+  .summary-bar {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:28px;
+  }
+  .summary-card { background:var(--ink); color:white; border-radius:12px; padding:14px 16px; text-align:center; }
+  .summary-card .slbl { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .summary-card .sval { font-family:'DM Serif Display',serif; font-size:20px; }
+
+  .month-group { margin-bottom:8px; }
+  .month-divider {
+    text-align:center; font-family:'DM Serif Display',serif; font-size:24px;
+    color:var(--ink); margin:28px 0 12px; padding-bottom:8px;
+    border-bottom:2px solid var(--gold); position:sticky; top:0;
+    background:var(--cream); z-index:10; padding-top:8px;
+  }
+
+  .paycheck-section { margin-bottom:16px; border:1.5px solid var(--border); border-radius:16px; overflow:hidden; }
+  .section-header { display:flex; justify-content:space-between; align-items:center; padding:12px 18px; background:var(--ink); color:white; }
+  .section-header .title { font-family:'DM Serif Display',serif; font-size:17px; }
+  .section-header .subtitle { font-size:10px; color:rgba(255,255,255,0.5); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
+  .section-header .paycheck-amt { text-align:right; }
+  .section-header .paycheck-amt .label { font-size:9px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px; }
+  .section-header .paycheck-amt .value { font-family:'DM Serif Display',serif; font-size:18px; color:var(--gold); }
+
+  .bill-row { display:grid; grid-template-columns:52px 1fr 70px 36px; align-items:center; padding:10px 18px; border-bottom:1px solid var(--border); gap:8px; transition:background .15s; }
+  .bill-row:hover { background:#f5f0e8; }
+  .bill-due { font-size:10px; font-weight:600; color:var(--gold); background:var(--gold-light); border-radius:6px; padding:3px 4px; text-align:center; }
+  .bill-name { font-size:13px; font-weight:500; color:var(--ink); }
+  .bill-category { font-size:9px; color:var(--gray); text-transform:uppercase; letter-spacing:0.5px; margin-top:1px; }
+  .bill-amount { font-size:14px; font-weight:600; color:var(--red); text-align:right; }
+  .bill-check { width:26px; height:26px; border:2px solid var(--border); border-radius:6px; margin-left:auto; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
+  .bill-check:hover { border-color:var(--green); background:var(--green-light); }
+  .bill-check.checked { background:var(--green); border-color:var(--green); }
+  .bill-check.checked::after { content:'✓'; color:white; font-size:13px; font-weight:700; }
+
+  .subtotal-row { display:grid; grid-template-columns:1fr auto auto; padding:10px 18px; background:var(--blue-light); gap:20px; align-items:center; }
+  .subtotal-row .label { font-size:11px; font-weight:600; color:var(--blue); text-transform:uppercase; letter-spacing:1px; }
+  .subtotal-row .total-amt { font-family:'DM Serif Display',serif; font-size:16px; color:var(--red); }
+  .subtotal-row .remaining { font-family:'DM Serif Display',serif; font-size:16px; min-width:70px; text-align:right; }
+
+  .income-row { display:grid; grid-template-columns:52px 1fr 70px 36px; align-items:center; padding:10px 18px; background:var(--green-light); border-top:1px solid var(--border); gap:8px; }
+  .info-row { display:grid; grid-template-columns:32px 1fr; align-items:center; padding:10px 18px; background:var(--orange-light); border-top:1px solid var(--border); gap:8px; }
+  .good-row { background:#edf7f0; }
+  .danger-row { background:#fde8e8; }
+
+  .tips-box { background:white; border:1.5px solid var(--border); border-radius:16px; padding:18px 20px; margin:24px 0; }
+  .tips-box h3 { font-family:'DM Serif Display',serif; font-size:18px; margin-bottom:12px; color:var(--ink); }
+  .tip-item { display:flex; gap:10px; margin-bottom:9px; align-items:flex-start; }
+  .tip-icon { font-size:15px; flex-shrink:0; margin-top:1px; }
+  .tip-text { font-size:12px; color:#555; line-height:1.5; }
+  .tip-text strong { color:var(--ink); }
+
+  .footer { text-align:center; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--gray); margin-top:16px; }
+  .footer strong { font-family:'DM Serif Display',serif; font-size:16px; color:var(--green); display:block; margin-bottom:4px; }
+
+  .tight-checks {
+    background:var(--ink); border-radius:16px; padding:20px; margin-bottom:24px; color:white;
+  }
+  .tight-checks h2 { font-family:'DM Serif Display',serif; font-size:20px; color:var(--gold); margin-bottom:14px; }
+  .tight-row { display:grid; grid-template-columns:140px 1fr auto; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.08); align-items:center; }
+  .tight-row:last-child { border-bottom:none; }
+  .tight-date { font-size:12px; color:var(--gold); font-weight:600; }
+  .tight-note { font-size:12px; color:rgba(255,255,255,0.7); }
+  .tight-amt { font-family:'DM Serif Display',serif; font-size:16px; text-align:right; }
+  .tight-amt.neg { color:#e63946; }
+  .tight-amt.low { color:#f9c74f; }
+  .tight-amt.ok { color:#74c69d; }
+
+  @media (max-width:600px) {
+    .summary-bar { grid-template-columns:1fr 1fr; }
+    .header h1 { font-size:28px; }
+    .tight-row { grid-template-columns:110px 1fr auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Complete Bill Payment Plan</div>
+    <h1>May 2026 – Jan 2027</h1>
+    <div class="header-sub">Phenequia M. Young &nbsp;·&nbsp; Debt-free target: August 23, 2028 &nbsp;·&nbsp; Bi-weekly Saturdays + Child Support 1st of month</div>
+  </div>
+
+  <div class="summary-bar">
+    <div class="summary-card">
+      <div class="slbl">Paycheck Amount</div>
+      <div class="sval">$3,261</div>
+    </div>
+    <div class="summary-card">
+      <div class="slbl">Child Support</div>
+      <div class="sval">$600/mo</div>
+    </div>
+    <div class="summary-card">
+      <div class="slbl">DMP Payment</div>
+      <div class="sval">$1,738/mo</div>
+    </div>
+  </div>
+
+  <div class="tight-checks">
+    <h2>⚠️ Tight Paycheck Periods — Plan Ahead</h2>
+    <div class="tight-row">
+      <div class="tight-date">May 9, 2026</div>
+      <div class="tight-note">DMP month · $3,170 in bills · only $91 left</div>
+      <div class="tight-amt low">$91</div>
+    </div>
+    <div class="tight-row">
+      <div class="tight-date">Jun 6, 2026</div>
+      <div class="tight-note">DMP + AT&T same period · bills exceed check</div>
+      <div class="tight-amt neg">−$65</div>
+    </div>
+    <div class="tight-row">
+      <div class="tight-date">Jul 4, 2026</div>
+      <div class="tight-note">DMP + BofA same period · bills exceed check</div>
+      <div class="tight-amt neg">−$177</div>
+    </div>
+    <div class="tight-row">
+      <div class="tight-date">Sep 12, 2026</div>
+      <div class="tight-note">DMP month · bills nearly equal check</div>
+      <div class="tight-amt neg">−$5</div>
+    </div>
+    <div class="tight-row">
+      <div class="tight-date">Oct 10, 2026</div>
+      <div class="tight-note">DMP month · only $91 left after bills</div>
+      <div class="tight-amt low">$91</div>
+    </div>
+    <div class="tight-row">
+      <div class="tight-date">Nov 7, 2026</div>
+      <div class="tight-note">DMP month · only $101 left after bills</div>
+      <div class="tight-amt low">$101</div>
+    </div>
+    <div class="tight-row">
+      <div class="tight-date">Dec 5, 2026</div>
+      <div class="tight-note">DMP + AT&T same period · bills exceed check</div>
+      <div class="tight-amt neg">−$65</div>
+    </div>
+  </div>
+
+<div class="month-group"><div class="month-divider">Apr 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #1 — Apr 26, 2026</div>
+        <div class="subtitle">Covers Apr 26th – May 8th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Apr 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Apr 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 4th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">May 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,328</div>
+      <div class="remaining" style="color:#74c69d;">$1,533</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,533 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">May 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #2 — May 9, 2026</div>
+        <div class="subtitle">Covers May 9th – May 22nd</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 18th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,170</div>
+      <div class="remaining" style="color:#f9c74f;">$91</div>
+    </div>
+<div class="info-row"><div style="font-size:18px;">⚠️</div><div><div class="bill-name" style="color:#c05a1f;">Only $91 left after bills — DMP period, stay disciplined</div><div class="bill-category">No dining out, no DoorDash, no extras until next check</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #3 — May 23, 2026</div>
+        <div class="subtitle">Covers May 23rd – Jun 5th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 1st</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Jun 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,258</div>
+      <div class="remaining" style="color:#74c69d;">$1,603</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,603 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Jun 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #4 — Jun 6, 2026</div>
+        <div class="subtitle">Covers Jun 6th – Jun 19th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 15th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,326</div>
+      <div class="remaining" style="color:#e63946;">-$65</div>
+    </div>
+<div class="info-row danger-row"><div style="font-size:18px;">🚨</div><div><div class="bill-name" style="color:#c0392b;">Bills exceed paycheck by $65!</div><div class="bill-category">Use buffer from previous check — limit all discretionary spending</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #5 — Jun 20, 2026</div>
+        <div class="subtitle">Covers Jun 20th – Jul 3rd</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 29th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Jul 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,016</div>
+      <div class="remaining" style="color:#74c69d;">$1,845</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,845 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Jul 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #6 — Jul 4, 2026</div>
+        <div class="subtitle">Covers Jul 4th – Jul 17th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 13th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,438</div>
+      <div class="remaining" style="color:#e63946;">-$177</div>
+    </div>
+<div class="info-row danger-row"><div style="font-size:18px;">🚨</div><div><div class="bill-name" style="color:#c0392b;">Bills exceed paycheck by $177!</div><div class="bill-category">Use buffer from previous check — limit all discretionary spending</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #7 — Jul 18, 2026</div>
+        <div class="subtitle">Covers Jul 18th – Jul 31st</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 27th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$437</div>
+      <div class="remaining" style="color:#74c69d;">$2,824</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$2,824 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Aug 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #8 — Aug 1, 2026</div>
+        <div class="subtitle">Covers Aug 1st – Aug 14th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 10th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Aug 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,484</div>
+      <div class="remaining" style="color:#74c69d;">$1,377</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,377 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #9 — Aug 15, 2026</div>
+        <div class="subtitle">Covers Aug 15th – Aug 28th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 24th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,110</div>
+      <div class="remaining" style="color:#f9c74f;">$151</div>
+    </div>
+<div class="info-row"><div style="font-size:18px;">⚠️</div><div><div class="bill-name" style="color:#c05a1f;">Only $151 left after bills — DMP period, stay disciplined</div><div class="bill-category">No dining out, no DoorDash, no extras until next check</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #10 — Aug 29, 2026</div>
+        <div class="subtitle">Covers Aug 29th – Sep 11th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 7th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Sep 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,280</div>
+      <div class="remaining" style="color:#74c69d;">$1,581</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,581 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Sep 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #11 — Sep 12, 2026</div>
+        <div class="subtitle">Covers Sep 12th – Sep 25th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 21st</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,266</div>
+      <div class="remaining" style="color:#e63946;">-$5</div>
+    </div>
+<div class="info-row danger-row"><div style="font-size:18px;">🚨</div><div><div class="bill-name" style="color:#c0392b;">Bills exceed paycheck by $5!</div><div class="bill-category">Use buffer from previous check — limit all discretionary spending</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #12 — Sep 26, 2026</div>
+        <div class="subtitle">Covers Sep 26th – Oct 9th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 5th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Oct 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,328</div>
+      <div class="remaining" style="color:#74c69d;">$1,533</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,533 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Oct 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #13 — Oct 10, 2026</div>
+        <div class="subtitle">Covers Oct 10th – Oct 23rd</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 19th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,170</div>
+      <div class="remaining" style="color:#f9c74f;">$91</div>
+    </div>
+<div class="info-row"><div style="font-size:18px;">⚠️</div><div><div class="bill-name" style="color:#c05a1f;">Only $91 left after bills — DMP period, stay disciplined</div><div class="bill-category">No dining out, no DoorDash, no extras until next check</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #14 — Oct 24, 2026</div>
+        <div class="subtitle">Covers Oct 24th – Nov 6th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 2nd</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Nov 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,424</div>
+      <div class="remaining" style="color:#74c69d;">$1,437</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,437 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Nov 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #15 — Nov 7, 2026</div>
+        <div class="subtitle">Covers Nov 7th – Nov 20th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 16th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,160</div>
+      <div class="remaining" style="color:#f9c74f;">$101</div>
+    </div>
+<div class="info-row"><div style="font-size:18px;">⚠️</div><div><div class="bill-name" style="color:#c05a1f;">Only $101 left after bills — DMP period, stay disciplined</div><div class="bill-category">No dining out, no DoorDash, no extras until next check</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #16 — Nov 21, 2026</div>
+        <div class="subtitle">Covers Nov 21st – Dec 4th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 30th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Dec 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,268</div>
+      <div class="remaining" style="color:#74c69d;">$1,593</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,593 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Dec 2026</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #17 — Dec 5, 2026</div>
+        <div class="subtitle">Covers Dec 5th – Dec 18th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 14th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$3,326</div>
+      <div class="remaining" style="color:#e63946;">-$65</div>
+    </div>
+<div class="info-row danger-row"><div style="font-size:18px;">🚨</div><div><div class="bill-name" style="color:#c0392b;">Bills exceed paycheck by $65!</div><div class="bill-category">Use buffer from previous check — limit all discretionary spending</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #18 — Dec 19, 2026</div>
+        <div class="subtitle">Covers Dec 19th – Jan 1st</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261 + $600 CS</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Dec 28th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 1st</div>
+      <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$1,650</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 1st</div>
+      <div><div class="bill-name">Centric Fiber Internet</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$69</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+<div class="income-row">
+      <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Jan 1st</div>
+      <div><div class="bill-name">Child Support 🎉</div><div class="bill-category">Income — included in remaining balance above</div></div>
+      <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
+      <div></div>
+    </div>    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,016</div>
+      <div class="remaining" style="color:#74c69d;">$1,845</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,845 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+<div class="month-group"><div class="month-divider">Jan 2027</div>
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #19 — Jan 2, 2027</div>
+        <div class="subtitle">Covers Jan 2nd – Jan 15th</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 4th</div>
+      <div><div class="bill-name">BofA</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$252</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 6th</div>
+      <div><div class="bill-name">AT&T Phone</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$166</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 11th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 13th</div>
+      <div><div class="bill-name">Amazon Prime</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$19</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 13th</div>
+      <div><div class="bill-name">Best Buy</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$29</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 14th</div>
+      <div><div class="bill-name">Car Insurance (Root)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$156</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 15th</div>
+      <div><div class="bill-name">Car Payment (Bridgecrest)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$392</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 15th</div>
+      <div><div class="bill-name">Nelnet (Student Loan)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$327</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$1,484</div>
+      <div class="remaining" style="color:#74c69d;">$1,777</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$1,777 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+  <div class="paycheck-section">
+    <div class="section-header">
+      <div>
+        <div class="title">Check #20 — Jan 16, 2027</div>
+        <div class="subtitle">Covers Jan 16th – Jan 31st</div>
+      </div>
+      <div class="paycheck-amt">
+        <div class="label">Take-home</div>
+        <div class="value">$3,261</div>
+      </div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 16th</div>
+      <div><div class="bill-name">Electric (AP Gas & Elec.)</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$135</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 17th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:16px;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 17th</div>
+      <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$81</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 18th</div>
+      <div><div class="bill-name">MySynchrony</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$140</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 22nd</div>
+      <div><div class="bill-name">Instacart</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$10</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 25th</div>
+      <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$68</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 25th</div>
+      <div><div class="bill-name">Netflix</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$28</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 25th</div>
+      <div><div class="bill-name">House Cleaning (Mop & Broom)</div><div class="bill-category">Bi-Weekly Service</div></div>
+      <div class="bill-amount">$143</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 26th</div>
+      <div><div class="bill-name">Kindle</div><div class="bill-category">Subscription</div></div>
+      <div class="bill-amount">$13</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 27th</div>
+      <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="subtotal-row">
+      <div class="label">Bills Total · Remaining After Bills</div>
+      <div class="total-amt">−$2,391</div>
+      <div class="remaining" style="color:#74c69d;">$870</div>
+    </div>
+<div class="info-row good-row"><div style="font-size:18px;">✅</div><div><div class="bill-name" style="color:#2d6a4f;">$870 remaining after bills</div><div class="bill-category">Cover living expenses · Save any surplus to emergency buffer</div></div></div>  </div>
+
+</div>
+
+
+  <div class="tips-box">
+    <h3>🧠 Rules to Live By Every Month</h3>
+    <div class="tip-item">
+      <div class="tip-icon">🚨</div>
+      <div class="tip-text"><strong>Red periods (negative balance):</strong> Jun 6, Jul 4, Sep 12, Dec 5 — use surplus from the previous check to cover the gap. Never spend all of a surplus check.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">🏦</div>
+      <div class="tip-text"><strong>DMP always hits mid-month</strong> — pay it the moment the check clears. $1,738 gone first = peace of mind for the rest of the period.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">💰</div>
+      <div class="tip-text"><strong>Surplus checks are your safety net</strong> — Jul 18 ($2,824), May 23 ($1,603), Jun 20 ($1,845), Dec 19 ($1,845). Save at least $200–300 from these to cover the next tight period.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">📅</div>
+      <div class="tip-text"><strong>Child support ($600) hits the 1st</strong> — it's already factored into each period's remaining balance above.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">✔️</div>
+      <div class="tip-text"><strong>Check off each bill</strong> as you pay it so nothing slips through.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>Debt-Free Date: August 23, 2028 🎯</strong>
+    Every single DMP payment brings you closer. You've got this, Phenequia. 💪🏾
+  </div>
+
+</div>
+</body>
+</html>
