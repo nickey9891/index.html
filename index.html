@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,103 +8,98 @@
 <style>
   :root {
     --ink: #1a1a2e; --cream: #faf7f2; --gold: #c9a84c; --gold-light: #f0e2b6;
-    --red: #c0392b; --green: #2d6a4f; --green-light: #d8f3dc;
+    --red: #c0392b; --red-light: #fdecea; --red-mid: #f5b7b1;
+    --green: #2d6a4f; --green-light: #d8f3dc;
+    --teal: #0e7c7b; --teal-light: #d4f1f0;
+    --spending: #1a6b3c; --spending-light: #e8f8ef;
     --blue: #1d3557; --blue-light: #e8f1f8;
-    --orange: #e07b39; --orange-light: #fdebd0;
     --gray: #8a8a8a; --border: #e0d8cc;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); padding:24px 16px; }
   .page { max-width:860px; margin:0 auto; }
 
-  .header { text-align:center; margin-bottom:28px; padding-bottom:20px; border-bottom:2px solid var(--gold); }
+  .header { text-align:center; margin-bottom:24px; padding-bottom:20px; border-bottom:2px solid var(--gold); }
   .header-label { font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-  .header h1 { font-family:'DM Serif Display',serif; font-size:34px; color:var(--ink); line-height:1; margin-bottom:4px; }
-  .header-sub { font-size:12px; color:var(--gray); font-weight:300; }
+  .header h1 { font-family:'DM Serif Display',serif; font-size:32px; color:var(--ink); line-height:1; margin-bottom:4px; }
+  .header-sub { font-size:12px; color:var(--gray); }
 
-  .today-banner {
-    background: linear-gradient(135deg, #c0392b, #e74c3c);
-    border-radius:16px; padding:18px 22px; margin-bottom:24px; color:white; text-align:center;
-  }
-  .today-banner h2 { font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:6px; }
-  .today-banner p { font-size:13px; opacity:0.9; line-height:1.5; }
+  .legend { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:20px; }
+  .legend-item { border-radius:10px; padding:12px 14px; text-align:center; }
+  .legend-item .l-icon { font-size:22px; margin-bottom:4px; }
+  .legend-item .l-name { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:2px; }
+  .legend-item .l-desc { font-size:10px; opacity:0.85; line-height:1.4; }
+  .leg-red { background:var(--red); color:white; }
+  .leg-teal { background:var(--teal); color:white; }
+  .leg-green { background:var(--spending); color:white; }
 
-  .how-it-works { background:var(--ink); border-radius:16px; padding:20px 24px; margin-bottom:24px; color:white; }
-  .how-it-works h2 { font-family:'DM Serif Display',serif; font-size:20px; color:var(--gold); margin-bottom:14px; }
-  .step { display:flex; gap:14px; margin-bottom:12px; align-items:flex-start; }
-  .step-num { background:var(--gold); color:var(--ink); width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0; }
-  .step-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.5; }
-  .step-text strong { color:white; }
-
-  .summary-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:24px; }
-  .sum-card { background:white; border:1.5px solid var(--border); border-radius:12px; padding:14px; text-align:center; }
-  .sum-card .slbl { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--gray); margin-bottom:4px; }
-  .sum-card .sval { font-family:'DM Serif Display',serif; font-size:20px; color:var(--ink); }
-  .sum-card.highlight { background:var(--green); border-color:var(--green); }
-  .sum-card.highlight .slbl { color:rgba(255,255,255,0.7); }
-  .sum-card.highlight .sval { color:white; }
-  .sum-card.warning { background:#c0392b; border-color:#c0392b; }
-  .sum-card.warning .slbl { color:rgba(255,255,255,0.7); }
-  .sum-card.warning .sval { color:white; }
+  .today-banner { background:linear-gradient(135deg,#c0392b,#e74c3c); border-radius:16px; padding:16px 20px; margin-bottom:20px; color:white; text-align:center; }
+  .today-banner h2 { font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:4px; }
+  .today-banner p { font-size:12px; opacity:0.9; line-height:1.5; }
 
   .month-group { margin-bottom:8px; }
-  .month-divider {
-    text-align:center; font-family:'DM Serif Display',serif; font-size:22px;
-    color:var(--ink); margin:24px 0 10px; padding:8px 0;
-    border-bottom:2px solid var(--gold); position:sticky; top:0;
-    background:var(--cream); z-index:10;
-  }
+  .month-divider { text-align:center; font-family:'DM Serif Display',serif; font-size:22px; color:var(--ink); margin:24px 0 10px; padding:8px 0; border-bottom:2px solid var(--gold); position:sticky; top:0; background:var(--cream); z-index:10; }
 
   .paycheck-section { margin-bottom:16px; border:1.5px solid var(--border); border-radius:16px; overflow:hidden; }
-  .transition-section { border:3px solid #c0392b; }
+  .transition-section { border:3px solid var(--red); }
   .section-header { display:flex; justify-content:space-between; align-items:center; padding:12px 18px; background:var(--ink); color:white; }
-  .transition-header { background: linear-gradient(135deg, #c0392b, #922b21); }
+  .transition-header { background:linear-gradient(135deg,#c0392b,#922b21); }
   .section-header .title { font-family:'DM Serif Display',serif; font-size:16px; }
   .section-header .subtitle { font-size:10px; color:rgba(255,255,255,0.5); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
   .section-header .paycheck-amt { text-align:right; }
   .section-header .paycheck-amt .label { font-size:9px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px; }
   .section-header .paycheck-amt .value { font-family:'DM Serif Display',serif; font-size:17px; color:var(--gold); }
 
-  .transition-banner {
-    background:#fde8e8; padding:12px 18px; font-size:13px; font-weight:600;
-    color:#c0392b; border-bottom:1px solid #f5c6c6; text-align:center;
-  }
+  .transition-banner { background:#fde8e8; padding:10px 18px; font-size:12px; font-weight:600; color:var(--red); border-bottom:1px solid var(--red-mid); text-align:center; }
 
-  .action-bar { display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid var(--border); }
-  .action-item { padding:12px 18px; }
-  .action-item.transfer { background:#fff5f5; border-right:1px solid var(--border); }
-  .action-item.keep { background:#f0faf4; }
-  .action-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:var(--gray); margin-bottom:4px; }
-  .action-note { font-size:10px; color:var(--gray); margin-top:2px; }
-  .action-amount { font-family:'DM Serif Display',serif; font-size:22px; }
-  .action-item.transfer .action-amount { color:var(--red); }
+  .account-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-bottom:2px solid var(--border); }
+  .acct-box { padding:12px 14px; text-align:center; border-right:1px solid var(--border); }
+  .acct-box:last-child { border-right:none; }
+  .acct-label { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+  .acct-val { font-family:'DM Serif Display',serif; font-size:22px; }
+  .red-box { background:var(--red-light); }
+  .red-box .acct-label { color:var(--red); }
+  .red-box .acct-val { color:var(--red); }
+  .teal-box { background:var(--teal-light); }
+  .teal-box .acct-label { color:var(--teal); }
+  .teal-box .acct-val { color:var(--teal); }
+  .green-box { background:var(--spending-light); }
+  .green-box .acct-label { color:var(--spending); }
+  .green-box .acct-val { color:var(--spending); }
 
-  .bill-row { display:grid; grid-template-columns:52px 1fr 70px 36px; align-items:center; padding:9px 18px; border-bottom:1px solid var(--border); gap:8px; transition:background .15s; }
-  .bill-row:hover { background:#f5f0e8; }
-  .bill-due { font-size:10px; font-weight:600; color:var(--gold); background:var(--gold-light); border-radius:6px; padding:3px 4px; text-align:center; }
+  .bill-row { display:grid; grid-template-columns:54px 1fr 70px 36px; align-items:center; padding:9px 18px; border-bottom:1px solid var(--red-mid); gap:8px; background:var(--red-light); }
+  .bill-row:hover { filter:brightness(0.97); }
+  .bill-due { font-size:10px; font-weight:600; background:#f5b7b1; color:var(--red); border-radius:6px; padding:3px 4px; text-align:center; }
   .bill-name { font-size:13px; font-weight:500; color:var(--ink); }
-  .bill-category { font-size:9px; color:var(--gray); text-transform:uppercase; letter-spacing:0.5px; margin-top:1px; }
+  .bill-category { font-size:9px; color:#888; text-transform:uppercase; letter-spacing:0.5px; margin-top:1px; }
   .bill-amount { font-size:13px; font-weight:600; color:var(--red); text-align:right; }
-  .bill-check { width:26px; height:26px; border:2px solid var(--border); border-radius:6px; margin-left:auto; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
+  .bill-check { width:26px; height:26px; border:2px solid var(--red-mid); border-radius:6px; margin-left:auto; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; background:white; }
   .bill-check:hover { border-color:var(--green); background:var(--green-light); }
   .bill-check.checked { background:var(--green); border-color:var(--green); }
   .bill-check.checked::after { content:'✓'; color:white; font-size:13px; font-weight:700; }
 
+  .income-row { display:grid; grid-template-columns:54px 1fr 70px 36px; align-items:center; padding:9px 18px; background:var(--green-light); border-bottom:1px solid #b0dfc0; gap:8px; }
+
+  .reserve-row { display:grid; grid-template-columns:28px 1fr auto; align-items:center; padding:9px 18px; background:var(--teal-light); border-top:1px solid #a8dedd; gap:10px; }
+  .reserve-pull-row { display:grid; grid-template-columns:28px 1fr auto; align-items:center; padding:9px 18px; background:#fff8f0; border-top:1px solid #f5d5a8; gap:10px; }
+  .reserve-icon { font-size:15px; }
+  .reserve-name { font-size:13px; font-weight:500; color:var(--teal); }
+  .reserve-cat { font-size:9px; color:#4aa8a7; text-transform:uppercase; letter-spacing:0.5px; margin-top:1px; }
+  .reserve-amt { font-family:'DM Serif Display',serif; font-size:16px; color:var(--teal); }
+  .reserve-amt-pull { font-family:'DM Serif Display',serif; font-size:16px; color:#e07b39; }
+
   .subtotal-row { display:grid; grid-template-columns:1fr auto auto; padding:10px 18px; background:var(--blue-light); gap:20px; align-items:center; }
   .subtotal-row .label { font-size:11px; font-weight:600; color:var(--blue); text-transform:uppercase; letter-spacing:1px; }
   .subtotal-row .total-amt { font-family:'DM Serif Display',serif; font-size:16px; color:var(--red); }
-  .subtotal-row .remaining { font-family:'DM Serif Display',serif; font-size:16px; min-width:70px; text-align:right; }
-
-  .income-row { display:grid; grid-template-columns:52px 1fr 70px 36px; align-items:center; padding:9px 18px; background:var(--green-light); border-top:1px solid var(--border); gap:8px; }
-  .reserve-add-row { display:grid; grid-template-columns:28px 1fr; align-items:center; padding:9px 18px; background:#edf7f0; border-top:1px solid var(--border); gap:10px; }
-  .reserve-pull-row { display:grid; grid-template-columns:28px 1fr; align-items:center; padding:9px 18px; background:#fff8f0; border-top:1px solid var(--border); gap:10px; }
+  .subtotal-row .remaining { font-family:'DM Serif Display',serif; font-size:16px; color:var(--green); min-width:80px; text-align:right; }
 
   .footer { text-align:center; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--gray); margin-top:16px; }
   .footer strong { font-family:'DM Serif Display',serif; font-size:16px; color:var(--green); display:block; margin-bottom:4px; }
 
   @media (max-width:600px) {
-    .summary-strip { grid-template-columns:1fr 1fr; }
     .header h1 { font-size:26px; }
+    .account-summary { grid-template-columns:1fr; }
+    .acct-box { border-right:none; border-bottom:1px solid var(--border); }
   }
 </style>
 </head>
@@ -115,47 +109,30 @@
   <div class="header">
     <div class="header-label">Smooth Paycheck System</div>
     <h1>May 2026 – Jan 2027</h1>
-    <div class="header-sub">Phenequia M. Young &nbsp;·&nbsp; $956 spending money every check starting May 23 &nbsp;·&nbsp; Debt-free: Aug 23, 2028</div>
+    <div class="header-sub">Phenequia M. Young &nbsp;·&nbsp; Debt-free: August 23, 2028</div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item leg-red">
+      <div class="l-icon">🔴</div>
+      <div class="l-name">Bill Account</div>
+      <div class="l-desc">All fixed monthly bills paid from here</div>
+    </div>
+    <div class="legend-item leg-teal">
+      <div class="l-icon">🟢</div>
+      <div class="l-name">Reserve Account</div>
+      <div class="l-desc">Surplus saved here · covers tight DMP periods</div>
+    </div>
+    <div class="legend-item leg-green">
+      <div class="l-icon">✅</div>
+      <div class="l-name">True Spending</div>
+      <div class="l-desc">Includes hair, mom & camp already deducted</div>
+    </div>
   </div>
 
   <div class="today-banner">
     <h2>🚨 Today is Payday — May 9, 2026</h2>
-    <p>This is your ONE transition check. Pay all $3,170 in bills in full using your $3,261 paycheck + $227 savings.<br>Keep $318 for gas & groceries only. <strong>May 23 is your fresh start — $956 every check from here on!</strong></p>
-  </div>
-
-  <div class="how-it-works">
-    <h2>⚙️ How This System Works (Starting May 23)</h2>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text"><strong>Every payday</strong> — transfer the exact "Bill Account" amount shown to a separate account. Pay ALL bills from that account only.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text"><strong>Keep exactly $956</strong> in your main checking every period for groceries, gas, dining, and personal spending. No more, no less.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text"><strong>Bill Reserve account</strong> — surplus periods build it up automatically. Tight DMP periods pull from it. You never feel the difference.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-text"><strong>Child support ($600)</strong> — when it lands on the 1st, transfer it straight to your Bill Account. Already factored into every period below.</div>
-    </div>
-  </div>
-
-  <div class="summary-strip">
-    <div class="sum-card warning">
-      <div class="slbl">Today — May 9</div>
-      <div class="sval">$318 only</div>
-    </div>
-    <div class="sum-card highlight">
-      <div class="slbl">From May 23 On</div>
-      <div class="sval">$956 / check</div>
-    </div>
-    <div class="sum-card">
-      <div class="slbl">Fresh Start In</div>
-      <div class="sval">14 days 🎯</div>
-    </div>
+    <p>Transition check. Pay all $3,170 in bills directly + use $227 savings.<br>Keep $318 for bare essentials only. <strong>May 23 is your fresh start — $689 true spending every check!</strong></p>
   </div>
 
 <div class="month-group"><div class="month-divider">May 2026</div>
@@ -170,20 +147,11 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="transition-banner">
-      🚨 TRANSITION CHECK — Pay ALL bills in full. Survive 14 days on $318. May 23 is your fresh start! 💪🏾
-    </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Pay Bills Directly</div>
-        <div class="action-amount">$3,170</div>
-        <div class='action-note'>(paycheck $3,261 + $227 savings)</div>
-      </div>
-      <div class="action-item keep" style="background:#fff5f5;">
-        <div class="action-label">⚠️ Survival Budget</div>
-        <div class="action-amount" style="color:#c0392b;">$318</div>
-        <div class='action-note'>Gas + groceries only!</div>
-      </div>
+    <div class="transition-banner">🚨 TRANSITION CHECK — Pay all $3,170 in bills directly. Keep $318 for bare essentials only. May 23 is your fresh start! 💪🏾</div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$3,170</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val">+$227</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ You Keep</div><div class="acct-val">$318</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">May 13th</div>
@@ -224,7 +192,7 @@
     <div class="bill-row">
       <div class="bill-due">May 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -251,14 +219,15 @@
       <div class="bill-amount">$10</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
-    <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Add your $227 savings to Bill Account</div><div class="bill-category">This covers the full $3,170 in bills for this period</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Add $227 savings → Bill Account</div><div class="reserve-cat">Reserve Account · covers full $3,170 in bills</div></div>
+      <div class="reserve-amt">$227</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$3,170</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -273,22 +242,15 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,258</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,435</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$470</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">May 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -307,6 +269,12 @@
       <div class="bill-due">May 27th</div>
       <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">May 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -335,18 +303,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Jun 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $647 to Bill Reserve</div><div class="bill-category">Reserve balance: $647</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $470 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $470</div></div>
+      <div class="reserve-amt">+$470</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,258</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,435</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -363,17 +332,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$470</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$689</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jun 6th</div>
@@ -426,7 +388,7 @@
     <div class="bill-row">
       <div class="bill-due">Jun 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -442,13 +404,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $647 from Bill Reserve</div><div class="bill-category">Reserve balance after: $0</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $470 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
+      <div class="reserve-amt-pull">−$470</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$3,326</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -463,17 +426,10 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,016</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,193</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$712</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$689</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jun 22nd</div>
@@ -484,7 +440,7 @@
     <div class="bill-row">
       <div class="bill-due">Jun 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -512,6 +468,12 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
+      <div class="bill-due">Jun 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
       <div class="bill-due">Jul 1st</div>
       <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$1,650</div>
@@ -525,18 +487,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Jul 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $889 to Bill Reserve</div><div class="bill-category">Reserve balance: $889</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $712 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $712</div></div>
+      <div class="reserve-amt">+$712</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,016</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,193</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -553,17 +516,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$712</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$689</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jul 4th</div>
@@ -622,7 +578,7 @@
     <div class="bill-row">
       <div class="bill-due">Jul 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -632,13 +588,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $889 from Bill Reserve</div><div class="bill-category">Reserve balance after: $0</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $712 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
+      <div class="reserve-amt-pull">−$712</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$3,438</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -653,17 +610,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$437</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$614</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,691</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$689</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jul 18th</div>
@@ -680,7 +630,7 @@
     <div class="bill-row">
       <div class="bill-due">Jul 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -707,14 +657,21 @@
       <div class="bill-amount">$143</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $1,868 to Bill Reserve</div><div class="bill-category">Reserve balance: $1,868</div></div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $1,691 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,691</div></div>
+      <div class="reserve-amt">+$1,691</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$437</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$614</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -731,17 +688,10 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,484</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,484</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$421</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$689</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Aug 1st</div>
@@ -793,18 +743,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Aug 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $421 to Bill Reserve</div><div class="bill-category">Reserve balance: $2,289</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $421 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $2,112</div></div>
+      <div class="reserve-amt">+$421</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$2,484</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -819,17 +770,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$837</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Aug 15th</div>
@@ -852,7 +796,7 @@
     <div class="bill-row">
       <div class="bill-due">Aug 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -882,7 +826,7 @@
     <div class="bill-row">
       <div class="bill-due">Aug 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -904,13 +848,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $805 from Bill Reserve</div><div class="bill-category">Reserve balance after: $1,484</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $837 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,275</div></div>
+      <div class="reserve-amt-pull">−$837</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$3,110</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$3,142</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -925,17 +870,16 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,280</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,425</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$480</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Aug 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Sep 1st</div>
@@ -969,18 +913,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Sep 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $625 to Bill Reserve</div><div class="bill-category">Reserve balance: $2,109</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $480 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,755</div></div>
+      <div class="reserve-amt">+$480</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,280</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,425</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -997,17 +942,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$993</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Sep 13th</div>
@@ -1048,7 +986,7 @@
     <div class="bill-row">
       <div class="bill-due">Sep 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1078,7 +1016,7 @@
     <div class="bill-row">
       <div class="bill-due">Sep 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1088,13 +1026,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $961 from Bill Reserve</div><div class="bill-category">Reserve balance after: $1,148</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $993 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $762</div></div>
+      <div class="reserve-amt-pull">−$993</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$3,266</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$3,298</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1109,17 +1048,10 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,328</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,473</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$432</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Sep 26th</div>
@@ -1131,6 +1063,12 @@
       <div class="bill-due">Sep 27th</div>
       <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Sep 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1165,18 +1103,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Oct 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $577 to Bill Reserve</div><div class="bill-category">Reserve balance: $1,725</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $432 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,194</div></div>
+      <div class="reserve-amt">+$432</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,328</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,473</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1193,17 +1132,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$865</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Oct 13th</div>
@@ -1244,7 +1176,7 @@
     <div class="bill-row">
       <div class="bill-due">Oct 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1272,13 +1204,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $865 from Bill Reserve</div><div class="bill-category">Reserve balance after: $860</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $865 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $329</div></div>
+      <div class="reserve-amt-pull">−$865</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$3,170</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1293,22 +1226,15 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,424</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,601</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$304</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Oct 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1327,6 +1253,12 @@
       <div class="bill-due">Oct 27th</div>
       <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Oct 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1361,18 +1293,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Nov 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $481 to Bill Reserve</div><div class="bill-category">Reserve balance: $1,341</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $304 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $633</div></div>
+      <div class="reserve-amt">+$304</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,424</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,601</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1389,17 +1322,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$633</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Nov 13th</div>
@@ -1446,7 +1372,7 @@
     <div class="bill-row">
       <div class="bill-due">Nov 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1462,13 +1388,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $855 from Bill Reserve</div><div class="bill-category">Reserve balance after: $486</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $633 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
+      <div class="reserve-amt-pull">−$633</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$3,160</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1483,17 +1410,10 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,268</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,445</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$460</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Nov 22nd</div>
@@ -1504,7 +1424,7 @@
     <div class="bill-row">
       <div class="bill-due">Nov 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1523,6 +1443,12 @@
       <div class="bill-due">Nov 27th</div>
       <div><div class="bill-name">Renters Insurance</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$35</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Nov 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1551,18 +1477,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Dec 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $637 to Bill Reserve</div><div class="bill-category">Reserve balance: $1,123</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $460 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $460</div></div>
+      <div class="reserve-amt">+$460</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,268</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,445</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1579,17 +1506,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$460</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Dec 6th</div>
@@ -1642,7 +1562,7 @@
     <div class="bill-row">
       <div class="bill-due">Dec 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1658,13 +1578,14 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $1,021 from Bill Reserve</div><div class="bill-category">Reserve balance after: $102</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $460 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
+      <div class="reserve-amt-pull">−$460</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$3,326</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1679,17 +1600,10 @@
         <div class="value">$3,861 + $600 CS</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,016</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,193</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$712</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Dec 22nd</div>
@@ -1700,7 +1614,7 @@
     <div class="bill-row">
       <div class="bill-due">Dec 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1728,6 +1642,12 @@
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
+      <div class="bill-due">Dec 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
+    <div class="bill-row">
       <div class="bill-due">Jan 1st</div>
       <div><div class="bill-name">Rent (Bilt)</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$1,650</div>
@@ -1741,18 +1661,19 @@
     </div>
     <div class="income-row">
       <div class="bill-due" style="background:#b7e4c7;color:#2d6a4f;">Jan 1st</div>
-      <div><div class="bill-name">Child Support arrives 🎉</div><div class="bill-category">Transfer straight to Bill Account</div></div>
+      <div><div class="bill-name">Child Support 🎉 → Bill Account</div><div class="bill-category">Transfer to bill account on arrival</div></div>
       <div class="bill-amount" style="color:#2d6a4f;">+$600</div>
       <div></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $889 to Bill Reserve</div><div class="bill-category">Reserve balance: $991</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $712 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $712</div></div>
+      <div class="reserve-amt">+$712</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,016</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,193</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1769,17 +1690,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$1,484</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$1,484</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$821</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jan 4th</div>
@@ -1829,14 +1743,15 @@
       <div class="bill-amount">$327</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
-    <div class="reserve-add-row">
-      <div style="font-size:16px;">🏦</div>
-      <div><div class="bill-name" style="color:#2d6a4f;">Add $821 to Bill Reserve</div><div class="bill-category">Reserve balance: $1,812</div></div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $821 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,533</div></div>
+      <div class="reserve-amt">+$821</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
       <div class="total-amt">−$1,484</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1851,17 +1766,10 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="action-bar">
-      <div class="action-item transfer">
-        <div class="action-label">💸 Transfer to Bill Account</div>
-        <div class="action-amount">$2,305</div>
-        
-      </div>
-      <div class="action-item keep" style="background:#f0faf4;">
-        <div class="action-label">✅ Keep for Spending</div>
-        <div class="action-amount" style="color:#2d6a4f;">$956</div>
-        
-      </div>
+    <div class="account-summary">
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$263</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jan 16th</div>
@@ -1872,7 +1780,7 @@
     <div class="bill-row">
       <div class="bill-due">Jan 17th</div>
       <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;">$1,738</div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1896,7 +1804,7 @@
     <div class="bill-row">
       <div class="bill-due">Jan 25th</div>
       <div><div class="bill-name">Apple Services</div><div class="bill-category">Subscription</div></div>
-      <div class="bill-amount">$68</div>
+      <div class="bill-amount">$100</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
@@ -1923,14 +1831,21 @@
       <div class="bill-amount">$35</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
+    <div class="bill-row">
+      <div class="bill-due">Jan 30th</div>
+      <div><div class="bill-name">Mom</div><div class="bill-category">Fixed — Must Pay</div></div>
+      <div class="bill-amount">$145</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
+    </div>
     <div class="reserve-pull-row">
-      <div style="font-size:16px;">⬇️</div>
-      <div><div class="bill-name" style="color:#c05a1f;">Pull $86 from Bill Reserve</div><div class="bill-category">Reserve balance after: $1,726</div></div>
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $263 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,270</div></div>
+      <div class="reserve-amt-pull">−$263</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,391</div>
-      <div class="remaining" style="color:#2d6a4f;">✓ Covered</div>
+      <div class="total-amt">−$2,568</div>
+      <div class="remaining">✓ Covered</div>
     </div>
   </div>
 
@@ -1939,7 +1854,7 @@
 
   <div class="footer">
     <strong>Debt-Free Date: August 23, 2028 🎯</strong>
-    One tough transition check. Then $956 every payday forever. You've got this, Phenequia. 💪🏾
+    🔴 Bills handled. 🟢 Reserve protected. ✅ $689 to live your life. You've got this, Phenequia. 💪🏾
   </div>
 
 </div>
