@@ -39,13 +39,11 @@
   .today-banner h2 { font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:4px; }
   .today-banner p { font-size:12px; opacity:0.9; line-height:1.5; }
 
-  .universal-goal-bar {
-    background:var(--ink); border-radius:16px; padding:18px 22px; margin-bottom:20px; color:white;
-  }
+  .universal-goal-bar { background:var(--ink); border-radius:16px; padding:18px 22px; margin-bottom:20px; color:white; }
   .universal-goal-bar h2 { font-family:'DM Serif Display',serif; font-size:20px; color:#f4a261; margin-bottom:6px; }
   .universal-goal-bar p { font-size:12px; color:rgba(255,255,255,0.8); margin-bottom:12px; }
   .big-progress { background:rgba(255,255,255,0.15); border-radius:20px; height:20px; overflow:hidden; }
-  .big-progress-fill { background:linear-gradient(90deg,#f4a261,#e76f51); height:100%; border-radius:20px; width:0%; transition:width 1s; }
+  .big-progress-fill { background:linear-gradient(90deg,#f4a261,#e76f51); height:100%; border-radius:20px; }
   .progress-stats { display:flex; justify-content:space-between; margin-top:8px; font-size:11px; color:rgba(255,255,255,0.6); }
 
   .month-group { margin-bottom:8px; }
@@ -152,7 +150,7 @@
     <div class="legend-item leg-orange">
       <div class="l-icon">🎢</div>
       <div class="l-name">Universal Fund</div>
-      <div class="l-desc">$227/check · goal $3,183</div>
+      <div class="l-desc">$245/check · starts May 23</div>
     </div>
     <div class="legend-item leg-green">
       <div class="l-icon">✅</div>
@@ -163,14 +161,14 @@
 
   <div class="today-banner">
     <h2>🚨 Today is Payday — May 9, 2026</h2>
-    <p>Transition check. Pay all $3,170 in bills directly + use $227 savings.<br>Keep $318 for bare essentials. <strong>May 23 is your fresh start!</strong></p>
+    <p>Transition check. Pay all $3,170 in bills directly + use $227 savings.<br>Keep $318 for bare essentials. <strong>Universal savings start May 23!</strong></p>
   </div>
 
   <div class="universal-goal-bar">
     <h2>🎢 Universal Orlando Savings Goal</h2>
-    <p>Saving $227 every check · 14 checks · Goal: $3,183 · Trip: December 19–23, 2026</p>
+    <p>Saving $245 every check · 13 checks starting May 23 · Goal: $3,183 · Trip: December 19–23, 2026</p>
     <div class="big-progress"><div class="big-progress-fill" style="width:0%;"></div></div>
-    <div class="progress-stats"><span>$0 saved</span><span>Goal: $3,183</span></div>
+    <div class="progress-stats"><span>Starts May 23</span><span>Goal: $3,183</span></div>
   </div>
 
 <div class="month-group"><div class="month-divider">May 2026</div>
@@ -185,11 +183,11 @@
         <div class="value">$3,261</div>
       </div>
     </div>
-    <div class="transition-banner">🚨 TRANSITION CHECK — Pay all $3,170 in bills directly. Keep $318 for bare essentials only. May 23 is your fresh start! 💪🏾</div>
+    <div class="transition-banner">🚨 TRANSITION CHECK — Pay all $3,170 in bills directly. Keep $318 for bare essentials. May 23 is your fresh start! 💪🏾</div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$3,170</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val">+$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ You Keep</div><div class="acct-val">$318</div></div>
+      <div class="acct-box green-box" style="grid-column:span 2;"><div class="acct-label">✅ You Keep</div><div class="acct-val">$318</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">May 13th</div>
@@ -257,15 +255,6 @@
       <div class="bill-amount">$10</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
-    <div class="universal-row">
-      <div class="universal-icon">🎢</div>
-      <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $227 · 7% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:7%;"></div></div>
-      </div>
-      <div class="universal-amt">$227</div>
-    </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
       <div><div class="reserve-name">Add $227 savings → Bill Account</div><div class="reserve-cat">Reserve Account · covers full $3,170 in bills</div></div>
@@ -292,8 +281,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,435</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$470</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">May 25th</div>
@@ -358,11 +347,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $454 · 14% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:14%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $245 of $3,183 · 7% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:7%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -392,8 +381,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$470</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$462</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$444</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jun 6th</div>
@@ -464,11 +453,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $681 · 21% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:21%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $490 of $3,183 · 15% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:15%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -496,8 +485,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,193</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$712</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$462</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$444</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jun 22nd</div>
@@ -562,11 +551,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $908 · 28% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:28%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $735 of $3,183 · 23% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:23%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -596,8 +585,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$712</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$462</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$444</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jul 4th</div>
@@ -668,11 +657,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $1,135 · 35% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:35%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $980 of $3,183 · 30% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:30%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -700,8 +689,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$614</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,691</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$462</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$444</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jul 18th</div>
@@ -754,11 +743,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $1,362 · 42% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:42%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $1,225 of $3,183 · 38% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:38%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -788,8 +777,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,484</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$421</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$462</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending (incl. camp)</div><div class="acct-val">$444</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Aug 1st</div>
@@ -848,11 +837,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $1,589 · 49% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:49%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $1,470 of $3,183 · 46% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:46%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -880,8 +869,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$837</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Aug 15th</div>
@@ -958,11 +947,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $1,816 · 57% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:57%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $1,715 of $3,183 · 53% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:53%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -990,8 +979,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,425</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$480</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Aug 30th</div>
@@ -1038,11 +1027,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $2,043 · 64% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:64%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $1,960 of $3,183 · 61% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:61%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -1072,8 +1061,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$993</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Sep 13th</div>
@@ -1156,11 +1145,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $2,270 · 71% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:71%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $2,205 of $3,183 · 69% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:69%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -1188,8 +1177,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,473</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$432</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Sep 26th</div>
@@ -1248,11 +1237,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $2,497 · 78% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:78%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $2,450 of $3,183 · 76% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:76%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -1282,8 +1271,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$865</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Oct 13th</div>
@@ -1354,11 +1343,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $2,724 · 85% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:85%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $2,695 of $3,183 · 84% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:84%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -1386,8 +1375,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,601</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$304</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Oct 25th</div>
@@ -1458,11 +1447,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $2,951 · 92% there!</div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $2,940 of $3,183 · 92% there!</div>
         <div class="progress-bar"><div class="progress-fill" style="width:92%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -1492,8 +1481,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$633</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Nov 13th</div>
@@ -1558,11 +1547,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $3,178 · 99% there!</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:99%;"></div></div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $3,183 of $3,183 · 100% there!</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -1590,8 +1579,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,445</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$460</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Nov 22nd</div>
@@ -1662,11 +1651,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $3,183 · 100% there!</div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $3,183 of $3,183 · 100% there!</div>
         <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
@@ -1696,8 +1685,8 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$460</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$227</div></div>
-      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$527</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
+      <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$509</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Dec 6th</div>
@@ -1768,11 +1757,11 @@
     <div class="universal-row">
       <div class="universal-icon">🎢</div>
       <div style="flex:1;">
-        <div class="universal-name">Universal Fund → Save $227</div>
-        <div class="universal-cat">Goal: $3,183 · Saved so far: $3,183 · 100% there!</div>
+        <div class="universal-name">Universal Fund → Save $245</div>
+        <div class="universal-cat">Saved: $3,183 of $3,183 · 100% there!</div>
         <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
       </div>
-      <div class="universal-amt">$227</div>
+      <div class="universal-amt">$245</div>
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
@@ -1800,7 +1789,7 @@
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,193</div></div>
       <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$712</div></div>
-      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">✓ Done!</div></div>
+      <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">🎉 Go!</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ True Spending</div><div class="acct-val">$754</div></div>
     </div>
     <div class="bill-row">
@@ -1865,7 +1854,7 @@
     </div>
     <div class="universal-trip-row">
       <div class="universal-icon">🎢</div>
-      <div><div class="universal-name">🎉 UNIVERSAL TRIP — Dec 19–23!</div><div class="universal-cat">You saved $3,183 · Time to celebrate! Enjoy every moment! 🎡✈️</div></div>
+      <div><div class="universal-name">🎉 UNIVERSAL TRIP — Dec 19–23, 2026!</div><div class="universal-cat">You saved $3,183 · Enjoy every moment with your babies! ✈️🎡</div></div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
