@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -282,7 +283,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,435</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$470</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,070</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -357,8 +358,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $470 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $470</div></div>
-      <div class="reserve-amt">+$470</div>
+      <div><div class="reserve-name">Move $1,070 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $1,070</div></div>
+      <div class="reserve-amt">+$1,070</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -381,8 +382,8 @@
       </div>
     </div>
     <div class="account-summary">
-      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$470</div></div>
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$1,588</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$717</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -436,12 +437,6 @@
     </div>
     <div class="bill-row">
       <div class="bill-due">Jun 17th</div>
-      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
-      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
-    </div>
-    <div class="bill-row">
-      <div class="bill-due">Jun 17th</div>
       <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$81</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
@@ -461,14 +456,14 @@
       </div>
       <div class="universal-amt">$245</div>
     </div>
-    <div class="reserve-pull-row">
-      <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $470 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
-      <div class="reserve-amt-pull">−$470</div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $717 → Reserve Account</div><div class="reserve-cat">Reserve Account · from $200 actual · balance: $917</div></div>
+      <div class="reserve-amt">+$717</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$3,326</div>
+      <div class="total-amt">−$1,588</div>
       <div class="remaining">✓ Covered</div>
     </div>
   </div>
@@ -485,10 +480,16 @@
       </div>
     </div>
     <div class="account-summary">
-      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,193</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$712</div></div>
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$3,931</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$426</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jun 20th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑 · moved from Jun 6</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jun 22nd</div>
@@ -559,14 +560,14 @@
       </div>
       <div class="universal-amt">$245</div>
     </div>
-    <div class="reserve-row">
-      <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $712 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $712</div></div>
-      <div class="reserve-amt">+$712</div>
+    <div class="reserve-pull-row">
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $426 from Reserve Account</div><div class="reserve-cat">Reserve Account · $600 CS applied to bills · balance after: $491</div></div>
+      <div class="reserve-amt-pull">−$426</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$2,193</div>
+      <div class="total-amt">−$3,931</div>
       <div class="remaining">✓ Covered</div>
     </div>
   </div>
@@ -585,8 +586,8 @@
       </div>
     </div>
     <div class="account-summary">
-      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$712</div></div>
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$1,700</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$605</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -646,12 +647,6 @@
     </div>
     <div class="bill-row">
       <div class="bill-due">Jul 17th</div>
-      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑</div></div>
-      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
-      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
-    </div>
-    <div class="bill-row">
-      <div class="bill-due">Jul 17th</div>
       <div><div class="bill-name">Cherry Pay</div><div class="bill-category">Fixed — Must Pay</div></div>
       <div class="bill-amount">$81</div>
       <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
@@ -665,14 +660,14 @@
       </div>
       <div class="universal-amt">$245</div>
     </div>
-    <div class="reserve-pull-row">
-      <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $712 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
-      <div class="reserve-amt-pull">−$712</div>
+    <div class="reserve-row">
+      <div class="reserve-icon">🟢</div>
+      <div><div class="reserve-name">Move $605 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,096</div></div>
+      <div class="reserve-amt">+$605</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$3,438</div>
+      <div class="total-amt">−$1,700</div>
       <div class="remaining">✓ Covered</div>
     </div>
   </div>
@@ -689,10 +684,16 @@
       </div>
     </div>
     <div class="account-summary">
-      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$614</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,691</div></div>
+      <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$47</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
+    </div>
+    <div class="bill-row">
+      <div class="bill-due">Jul 18th</div>
+      <div><div class="bill-name">DMP — ACCC (6 accounts)</div><div class="bill-category">Debt Management 🔑 · moved from Jul 4</div></div>
+      <div class="bill-amount" style="color:#8b0000;font-size:15px;font-weight:700;">$1,738</div>
+      <div class="bill-check" onclick="this.classList.toggle('checked')"></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Jul 18th</div>
@@ -751,14 +752,14 @@
       </div>
       <div class="universal-amt">$245</div>
     </div>
-    <div class="reserve-row">
-      <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $1,691 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,691</div></div>
-      <div class="reserve-amt">+$1,691</div>
+    <div class="reserve-pull-row">
+      <div class="reserve-icon">⬇️</div>
+      <div><div class="reserve-name">Pull $47 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,049</div></div>
+      <div class="reserve-amt-pull">−$47</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
-      <div class="total-amt">−$614</div>
+      <div class="total-amt">−$2,352</div>
       <div class="remaining">✓ Covered</div>
     </div>
   </div>
@@ -778,7 +779,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,484</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$421</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,021</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -847,8 +848,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $421 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $2,112</div></div>
-      <div class="reserve-amt">+$421</div>
+      <div><div class="reserve-name">Move $1,021 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $2,070</div></div>
+      <div class="reserve-amt">+$1,021</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -957,7 +958,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $837 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,275</div></div>
+      <div><div class="reserve-name">Pull $837 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,233</div></div>
       <div class="reserve-amt-pull">−$837</div>
     </div>
     <div class="subtotal-row">
@@ -980,7 +981,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,425</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$480</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,080</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -1037,8 +1038,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $480 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,755</div></div>
-      <div class="reserve-amt">+$480</div>
+      <div><div class="reserve-name">Move $1,080 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $2,313</div></div>
+      <div class="reserve-amt">+$1,080</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1155,7 +1156,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $993 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $762</div></div>
+      <div><div class="reserve-name">Pull $993 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,320</div></div>
       <div class="reserve-amt-pull">−$993</div>
     </div>
     <div class="subtotal-row">
@@ -1178,7 +1179,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,473</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$432</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,032</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -1247,8 +1248,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $432 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,194</div></div>
-      <div class="reserve-amt">+$432</div>
+      <div><div class="reserve-name">Move $1,032 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $2,352</div></div>
+      <div class="reserve-amt">+$1,032</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1353,7 +1354,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $865 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $329</div></div>
+      <div><div class="reserve-name">Pull $865 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,487</div></div>
       <div class="reserve-amt-pull">−$865</div>
     </div>
     <div class="subtotal-row">
@@ -1376,7 +1377,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,601</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$304</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$904</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -1457,8 +1458,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $304 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $633</div></div>
-      <div class="reserve-amt">+$304</div>
+      <div><div class="reserve-name">Move $904 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $2,391</div></div>
+      <div class="reserve-amt">+$904</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1482,7 +1483,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$633</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$855</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -1557,8 +1558,8 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $633 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
-      <div class="reserve-amt-pull">−$633</div>
+      <div><div class="reserve-name">Pull $855 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,536</div></div>
+      <div class="reserve-amt-pull">−$855</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1580,7 +1581,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,445</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$460</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,060</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -1661,8 +1662,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $460 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $460</div></div>
-      <div class="reserve-amt">+$460</div>
+      <div><div class="reserve-name">Move $1,060 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $2,596</div></div>
+      <div class="reserve-amt">+$1,060</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1686,7 +1687,7 @@
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,305</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$460</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#e07b39;">−$1,021</div></div>
       <div class="acct-box orange-box"><div class="acct-label">🎢 Universal Fund</div><div class="acct-val">$245</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Day-to-Day</div><div class="acct-val">$711</div></div>
     </div>
@@ -1767,8 +1768,8 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $460 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $0</div></div>
-      <div class="reserve-amt-pull">−$460</div>
+      <div><div class="reserve-name">Pull $1,021 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,575</div></div>
+      <div class="reserve-amt-pull">−$1,021</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1790,7 +1791,7 @@
     </div>
     <div class="account-summary three-col">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bill Account</div><div class="acct-val">$2,193</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$712</div></div>
+      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$1,312</div></div>
       <div class="acct-box green-box"><div class="acct-label">✅ Spending Money</div><div class="acct-val">$956</div></div>
     </div>
     <div class="bill-row">
@@ -1859,8 +1860,8 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $712 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $712</div></div>
-      <div class="reserve-amt">+$712</div>
+      <div><div class="reserve-name">Move $1,312 → Reserve Account</div><div class="reserve-cat">Reserve Account · incl. $600 CS · balance: $2,887</div></div>
+      <div class="reserve-amt">+$1,312</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Bills This Period</div>
@@ -1937,7 +1938,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Move $821 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $1,533</div></div>
+      <div><div class="reserve-name">Move $821 → Reserve Account</div><div class="reserve-cat">Reserve Account · balance: $3,708</div></div>
       <div class="reserve-amt">+$821</div>
     </div>
     <div class="subtotal-row">
@@ -2031,7 +2032,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $263 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $1,270</div></div>
+      <div><div class="reserve-name">Pull $263 from Reserve Account</div><div class="reserve-cat">Reserve Account · balance after: $3,445</div></div>
       <div class="reserve-amt-pull">−$263</div>
     </div>
     <div class="subtotal-row">
