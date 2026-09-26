@@ -63,6 +63,7 @@
   .green-box { background:var(--spending-light); } .green-box .acct-label,.green-box .acct-val { color:var(--spending); }
   .amber-box { background:var(--amber-light); } .amber-box .acct-label,.amber-box .acct-val { color:var(--amber); }
   .purple-box { background:var(--purple-light); } .purple-box .acct-label,.purple-box .acct-val { color:var(--purple); }
+  .plan-box { background:var(--plan-light); } .plan-box .acct-label,.plan-box .acct-val { color:var(--plan); }
   .planned-row { display:grid; grid-template-columns:28px 1fr auto; align-items:center; padding:9px 18px; background:var(--plan-light); border-top:1px solid #eccfe0; gap:10px; }
   .planned-icon { font-size:15px; }
   .planned-name { font-size:13px; font-weight:500; color:var(--plan); }
@@ -137,7 +138,7 @@
     <h2>🩹 Nelnet Catch-Up + New Grocery/Family Split — Sep 19, 2026</h2>
     <p><strong>Nelnet correction (one-time):</strong> a $326.36 past-due Nelnet payment — missed because autopay wasn't set up — was covered today from Bills ($70.00) + Reserve ($189.82) + Spending ($66.54). Spending drops from $265.74 to <strong>$199.20</strong>; Bills and Reserve both reset to <strong>$0</strong>. This is a one-time delinquency catch-up, not a new recurring bill — the regular ~$327 Nelnet line keeps running as before.
     <br><br>
-    <strong>New system starting Sep 26:</strong> the old flat $600/check "Spending Money" allocation is retired. In its place: <strong>$300/check Groceries</strong> + <strong>$450/check Family/Everyday Spending</strong> ($750/check total), tracked as two separate buckets. Family/Everyday covers gas, eating out, kids' extras, Target/Walmart non-grocery runs, and ordinary personal spending — big planned purchases get their own line instead. Leftover grocery or family money at period-end may be swept to Reserve, which rebuilds from $0 on Sep 19 toward <strong>~$3,659 by Jan 30</strong>.</p>
+    <strong>New system starting Sep 26:</strong> the old flat $600/check "Spending Money" allocation is retired. In its place: <strong>$300/check Groceries</strong> + <strong>$450/check Family/Everyday Spending</strong> ($750/check total), tracked as two separate buckets. Family/Everyday covers gas, eating out, kids' extras, Target/Walmart non-grocery runs, and ordinary personal spending — big planned purchases get their own line instead. Leftover grocery or family money at period-end may be swept to Reserve. For the Sep 26 cycle, hair is a separate <strong>$267 Personal Care</strong> line and the <strong>$180 nails/toes/brows/lashes</strong> expense is deferred to a future paycheck. With that $180 not yet scheduled, Reserve currently projects to <strong>~$3,746 by Jan 30</strong>.</p>
   </div>
 
 <div class="month-group"><div class="month-divider">Aug 2026</div>
@@ -222,7 +223,7 @@
   <div class="paycheck-section correction-section">
     <div class="section-header correction-header">
       <div>
-        <div class="title">📍 TODAY — Check — Sep 12, 2026</div>
+        <div class="title">Check — Sep 12, 2026</div>
         <div class="subtitle">Covers Sep 12th – Sep 25th</div>
       </div>
       <div class="paycheck-amt">
@@ -334,19 +335,19 @@
   <div class="paycheck-section">
     <div class="section-header">
       <div>
-        <div class="title">Check — Sep 26, 2026</div>
-        <div class="subtitle">Covers Sep 26th – Oct 9th &nbsp;·&nbsp; New grocery/family split begins</div>
+        <div class="title">📍 CURRENT — Check — Sep 26, 2026</div>
+        <div class="subtitle">Covers Sep 26th – Oct 9th &nbsp;·&nbsp; Actual salary $3,349.97 + $600 child support on Oct 1</div>
       </div>
       <div class="paycheck-amt">
-        <div class="label">Take-home</div>
-        <div class="value">$3,861</div>
+        <div class="label">Cycle cash</div>
+        <div class="value">$3,949.97</div>
       </div>
     </div>
     <div class="account-summary">
       <div class="acct-box red-box"><div class="acct-label">🔴 Bills</div><div class="acct-val">$2,490</div></div>
       <div class="acct-box amber-box"><div class="acct-label">🛒 Groceries</div><div class="acct-val">$300</div></div>
       <div class="acct-box purple-box"><div class="acct-label">👪 Family</div><div class="acct-val">$450</div></div>
-      <div class="acct-box teal-box"><div class="acct-label">🟢 Reserve</div><div class="acct-val" style="color:#0e7c7b;">+$356</div></div>
+      <div class="acct-box plan-box"><div class="acct-label">💇 Personal Care</div><div class="acct-val">$267</div></div>
     </div>
     <div class="bill-row">
       <div class="bill-due">Sep 26th</div>
@@ -404,13 +405,18 @@
     </div>
     <div class="planned-row">
       <div class="planned-icon">💇</div>
-      <div><div class="planned-name">Hair Appointment</div><div class="planned-cat">Personal Care — One-Time (moved from Sep 25)</div></div>
-      <div class="planned-amt">$265</div>
+      <div><div class="planned-name">Hair Appointment</div><div class="planned-cat">Personal Care — paid this cycle</div></div>
+      <div class="planned-amt">$267</div>
+    </div>
+    <div class="planned-row">
+      <div class="planned-icon">💅</div>
+      <div><div class="planned-name">Nails / Toes / Brows / Lashes</div><div class="planned-cat">Deferred this check — fund from a future paycheck</div></div>
+      <div class="planned-amt">$0</div>
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $356 → Reserve Account</div><div class="reserve-cat">Starting Reserve $0 (post Nelnet catch-up) · Ending Reserve: $356</div></div>
-      <div class="reserve-amt">+$356</div>
+      <div><div class="reserve-name">Add $442.97 → Reserve Account</div><div class="reserve-cat">Starting Reserve $0 (post Nelnet catch-up) · Ending Reserve: $442.97</div></div>
+      <div class="reserve-amt">+$442.97</div>
     </div>
     <div class="subtotal-row">
       <div class="label">Total Fixed Bills This Period</div>
@@ -488,7 +494,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $295 from Reserve Account</div><div class="reserve-cat">Starting Reserve $356 · Ending Reserve: $61</div></div>
+      <div><div class="reserve-name">Pull $295 from Reserve Account</div><div class="reserve-cat">Starting Reserve $442.97 · Ending Reserve: $147.97</div></div>
       <div class="reserve-amt-pull">−$295</div>
     </div>
     <div class="subtotal-row">
@@ -583,7 +589,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $493 → Reserve Account</div><div class="reserve-cat">Starting Reserve $61 · Ending Reserve: $554</div></div>
+      <div><div class="reserve-name">Add $493 → Reserve Account</div><div class="reserve-cat">Starting Reserve $147.97 · Ending Reserve: $640.97</div></div>
       <div class="reserve-amt">+$493</div>
     </div>
     <div class="subtotal-row">
@@ -656,7 +662,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $285 from Reserve Account</div><div class="reserve-cat">Starting Reserve $554 · Ending Reserve: $269</div></div>
+      <div><div class="reserve-name">Pull $285 from Reserve Account</div><div class="reserve-cat">Starting Reserve $640.97 · Ending Reserve: $355.97</div></div>
       <div class="reserve-amt-pull">−$285</div>
     </div>
     <div class="subtotal-row">
@@ -751,7 +757,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $649 → Reserve Account</div><div class="reserve-cat">Starting Reserve $269 · Ending Reserve: $918</div></div>
+      <div><div class="reserve-name">Add $649 → Reserve Account</div><div class="reserve-cat">Starting Reserve $355.97 · Ending Reserve: $1,004.97</div></div>
       <div class="reserve-amt">+$649</div>
     </div>
     <div class="subtotal-row">
@@ -830,7 +836,7 @@
     </div>
     <div class="reserve-pull-row">
       <div class="reserve-icon">⬇️</div>
-      <div><div class="reserve-name">Pull $451 from Reserve Account</div><div class="reserve-cat">Starting Reserve $918 · Ending Reserve: $467</div></div>
+      <div><div class="reserve-name">Pull $451 from Reserve Account</div><div class="reserve-cat">Starting Reserve $1,004.97 · Ending Reserve: $553.97</div></div>
       <div class="reserve-amt-pull">−$451</div>
     </div>
     <div class="subtotal-row">
@@ -919,7 +925,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $901 → Reserve Account</div><div class="reserve-cat">Starting Reserve $467 · Ending Reserve: $1,368</div></div>
+      <div><div class="reserve-name">Add $901 → Reserve Account</div><div class="reserve-cat">Starting Reserve $553.97 · Ending Reserve: $1,454.97</div></div>
       <div class="reserve-amt">+$901</div>
     </div>
     <div class="subtotal-row">
@@ -992,7 +998,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $1,170 → Reserve Account</div><div class="reserve-cat">Starting Reserve $1,368 · Ending Reserve: $2,538</div></div>
+      <div><div class="reserve-name">Add $1,170 → Reserve Account</div><div class="reserve-cat">Starting Reserve $1,454.97 · Ending Reserve: $2,624.97</div></div>
       <div class="reserve-amt">+$1,170</div>
     </div>
     <div class="subtotal-row">
@@ -1063,7 +1069,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $452 → Reserve Account</div><div class="reserve-cat">Starting Reserve $2,538 · Ending Reserve: $2,990</div></div>
+      <div><div class="reserve-name">Add $452 → Reserve Account</div><div class="reserve-cat">Starting Reserve $2,624.97 · Ending Reserve: $3,076.97</div></div>
       <div class="reserve-amt">+$452</div>
     </div>
     <div class="subtotal-row">
@@ -1134,7 +1140,7 @@
     </div>
     <div class="reserve-row">
       <div class="reserve-icon">🟢</div>
-      <div><div class="reserve-name">Add $669 → Reserve Account</div><div class="reserve-cat">Starting Reserve $2,990 · Ending Reserve: $3,659</div></div>
+      <div><div class="reserve-name">Add $669 → Reserve Account</div><div class="reserve-cat">Starting Reserve $3,076.97 · Ending Reserve: $3,745.97</div></div>
       <div class="reserve-amt">+$669</div>
     </div>
     <div class="subtotal-row">
@@ -1149,7 +1155,7 @@
 
   <div class="footer">
     <strong>Debt-Free Date: August 23, 2028 🎯</strong>
-    🔴 Bills covered. 🛒 Groceries + 👪 Family tracked separately at $750/check. 🟢 Reserve resets to $0 on Sep 19, rebuilding to ~$3,659 by Jan 30.<br>
+    🔴 Bills covered. 🛒 Groceries $300/check + 👪 Family $450/check. 💇 Sep 26 hair is separate at $267; the $180 grooming expense is deferred. 🟢 Reserve resets to $0 on Sep 19, currently projecting to ~$3,746 by Jan 30 before future grooming set-asides.<br>
     Reserve figures from Nov 7 onward carry forward the same Groceries $300 + Family $450 formula and current bill schedule — recheck them as each cycle approaches. That's the win, Phenequia. 💪🏾
   </div>
 
